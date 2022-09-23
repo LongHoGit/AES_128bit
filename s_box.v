@@ -1,5 +1,4 @@
 `timescale 1ns / 1ps
-
 //substitution box table
 module s_box(x,y,sb_out);
 

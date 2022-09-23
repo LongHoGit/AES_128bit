@@ -1,10 +1,12 @@
 `timescale 1ns / 1ps
-
 //sub byte operation
-module sub_byte(in_key,out_key);
+module sub_byte(clk,in_key,reg_out_key);
 
+input clk;
 input [0:127] in_key;
-output [0:127] out_key;
+output reg [0:127] reg_out_key;
+
+wire [0:127] out_key;
 
 s_box sb0(in_key[0:3],in_key[4:7],out_key[0:7]);
 s_box sb1(in_key[40:43],in_key[44:47],out_key[40:47]);
@@ -26,4 +28,8 @@ s_box sb13(in_key[8:11],in_key[12:15],out_key[8:15]);
 s_box sb14(in_key[48:51],in_key[52:55],out_key[48:55]);
 s_box sb15(in_key[88:91],in_key[92:95],out_key[88:95]);
 
+always @(posedge clk)
+ begin
+ 	reg_out_key = out_key;
+ end
 endmodule
